@@ -1,47 +1,54 @@
 <div class="container">
-<nav class="p-2 m-2 border border-info">
-<button class="btn btn-outline-info" (click)="handleAdd()">
-    New Doctor <i class="bi bi-person-fill-add"></i>
-</button>
-</nav>
-<div class="card mt-2">
-<div class="card-header">
-<h3>Doctor List</h3>
-</div>
-<div class="card-body" *ngIf="doctors; else errors">
-<table class="table" >
-<thead>
-    <tr>
-        <th>ID</th><th>Name</th><th>Speciality</th><th>Active</th>
-    </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let d of doctors">
-     <td>{{d.id}}</td>
-     <td>{{d.name}}</td>
-     <td>{{d.speciality}}</td>
-     <td>
-        <i *ngIf="d.active==true" class="bi bi-check-circle-fill text-success"></i>
-        <i *ngIf="d.active==false" class="bi bi-x-circle-fill text-danger"></i>
-    </td>
-    <td>
-        <button (click)="handleActivate(d)" 
-        class="btn" 
-        [ngClass]="d.active==true?'btn-danger':'btn-success'">
-            <span *ngIf="d.active==false">Activate</span>
-            <span *ngIf="d.active==true">Deactivate</span>
+    <nav class="p-2 m-2 border border-info">
+        <button class="btn btn-outline-info" (click)="handleAdd()">
+            New Doctor <i class="bi bi-person-fill-add"></i>
         </button>
-    </td>
-    <td>
-        <button (click)="handleDelete(d)" class="btn btn-danger">
-            <i class="bi bi-trash"></i>
-        </button>
-    </td>
-    </tr>
-</tbody>
-</table>
-</div>
-</div>
+    </nav>
+    <div class="card mt-2">
+        <div class="card-header">
+            <h3>Doctor List</h3>
+        </div>
+        <div class="card-body" *ngIf="doctors; else errors">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Speciality</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of doctors">
+                        <td>{{d.id}}</td>
+                        <td>{{d.name}}</td>
+                        <td>{{d.speciality}}</td>
+                        <td>
+                            <i *ngIf="d.active==true" class="bi bi-check-circle-fill text-success"></i>
+                            <i *ngIf="d.active==false" class="bi bi-x-circle-fill text-danger"></i>
+                        </td>
+                        <td>
+                            <button (click)="handleActivate(d)" class="btn"
+                                [ngClass]="d.active==true?'btn-danger':'btn-success'">
+                                <span *ngIf="d.active==false">Activate</span>
+                                <span *ngIf="d.active==true">Deactivate</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button (click)="handleDelete(d)" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button (click)="handleEdit(d)" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <ng-template #errors>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { DoctorsService } from '../services/doctors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-doctor',
@@ -8,7 +10,10 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 })
 export class AddDoctorComponent implements OnInit {
   addDoctorFormGroup!: FormGroup
-  constructor(private fb: FormBuilder) { }
+  errorMessage!: string
+  constructor(private fb: FormBuilder,
+    private doctorService: DoctorsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.addDoctorFormGroup = this.fb.group({
@@ -18,8 +23,18 @@ export class AddDoctorComponent implements OnInit {
     })
   }
 
-  add(){
-    
+  handleAddDoctor(){
+      let doctor = this.addDoctorFormGroup.value
+      this.doctorService.addDoctor(doctor)
+      .subscribe({
+        next:(data)=>{
+          //this.router.navigateByUrl('/doctors')
+          this.router.navigate(['/doctors'])
+        },
+        error:(err)=>{ 
+          this.errorMessage= err
+        }
+      })
   }
 
   getErrorMessage(fieldName: string,errors:ValidationErrors):string{

@@ -1,1 +1,38 @@
-<p>medicaments works!</p>
+<div class="container">
+    <nav class="p-2 m-2 border border-info">
+        <button class="btn btn-outline-info" (click)="handleAdd()">
+            New Medicament <i class="bi bi-person-fill-add"></i>
+        </button>
+    </nav>
+    <div class="card mt-2">
+        <div class="card-header">
+            <h3>Medicament List</h3>
+        </div>
+        <div class="card-body" *ngIf="medicaments; else errors">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Speciality</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of medicaments">
+                        <td>{{d.intitile}}</td>
+                        <td>{{d.nbrecomprimes}}</td>
+                        <td>{{d.ref}}</td>                       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #errors>
+    <div class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+</ng-template>

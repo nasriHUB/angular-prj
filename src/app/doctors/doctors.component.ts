@@ -61,4 +61,7 @@ export class DoctorsComponent implements OnInit {
   handleAdd(){
    this.router.navigateByUrl('/add-doctor')
   }
+  handleEdit(d:Doctor){
+    this.router.navigateByUrl('/edit-doctor/'+d.id)
+  }
 }
