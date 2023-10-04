@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row mt-3" >
+        <div class="col-md-6 offset-md-3">
+            {{ addDoctorFormGroup.value | json }}
+            <form [formGroup]="addDoctorFormGroup" (ngSubmit)="add()">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" formControlName="name" class="form-control">
+                    <small *ngIf="addDoctorFormGroup.controls['name'].errors && addDoctorFormGroup.controls['name'].touched" class="text-danger">
+                        {{getErrorMessage('Name',addDoctorFormGroup.controls['name'].errors)}}
+                      </small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Speciality</label>
+                    <select class="form-select" formControlName="speciality">
+                        
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <small *ngIf="addDoctorFormGroup.controls['speciality'].errors && addDoctorFormGroup.controls['speciality'].touched" class="text-danger">
+                        {{getErrorMessage('Speciality',addDoctorFormGroup.controls['speciality'].errors)}}
+                      </small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Active</label>
+                    <input type="checkbox" class="form-check" formControlName="active">
+                    <small *ngIf="addDoctorFormGroup.controls['active'].errors && addDoctorFormGroup.controls['active'].touched" class="text-danger">
+                        {{getErrorMessage('active',addDoctorFormGroup.controls['active'].errors)}}
+                      </small>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-success" type="submit"
+                        [disabled]="addDoctorFormGroup.invalid">Add Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
